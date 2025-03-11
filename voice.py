@@ -39,7 +39,8 @@ def scan_voice_dir(directory) -> list[Voice]:
 
                     if num_speakers > 1:
                         voices.extend(
-                            Voice(f'{name} ({n})', onnx_path, language, n)
+                            Voice(f'{name} (speaker {n})',
+                                  onnx_path, language, n)
                             for n in range(num_speakers)
                         )
                     else:

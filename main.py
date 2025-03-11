@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from pathlib import Path
 from piper import speak
 from voice import Voice, scan_voice_dir
 from flask import Flask, request, Response
@@ -40,7 +39,6 @@ def list_voices():
 @app.route('/synthesize-speech', methods=['POST'])
 def synthesize_speech():
     """Endpoint to synthesize speech from text"""
-
     # parse request data
     data = request.get_json()
     payload = data['payload']
@@ -56,14 +54,11 @@ def synthesize_speech():
 
 
 if __name__ == '__main__':
-    host = settings.host
-    port = settings.port
-
-    # Set up logging
+    # set up logging
     import logging
     logger = logging.getLogger('waitress')
     logger.setLevel(logging.INFO)
 
     # start server
     from waitress import serve
-    serve(app, host=host, port=port)
+    serve(app, host=settings.host, port=settings.port)
