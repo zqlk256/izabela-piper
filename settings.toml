@@ -1,0 +1,9 @@
+host = "localhost"
+port = "8000"
+
+# adjust these for your machine
+voice_dir = "E:\\piper\\voices"
+piper_exe = "E:\\piper\\piper.exe"
+
+# additional command line arguments to pass to piper
+piper_args = []
