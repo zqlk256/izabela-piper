@@ -1,12 +1,14 @@
-from voice import Voice
+from pathlib import Path
 from subprocess import run
+from typing import List
+from voice import Voice
 
 import os
 import tempfile
 import uuid
 
 
-def speak(text: str, voice: Voice, piper_exe: str, piper_args: list[str]) -> bytes:
+def speak(text: str, voice: Voice, piper_exe: Path, piper_args: List[str]) -> bytes:
     """Invokes piper.exe with the given voice and text and returns the resulting WAV data."""
 
     # Create a unique temporary file name
@@ -17,13 +19,14 @@ def speak(text: str, voice: Voice, piper_exe: str, piper_args: list[str]) -> byt
     input_bytes = text.encode('utf-8')
 
     # the piper command line
-    command = [piper_exe,
-               "-q",  # quiet
-               "-m", voice.path,
-               "-s", str(voice.speaker_id),
-               "-f", temp_file,
-               *piper_args
-               ]
+    command = [
+        piper_exe,
+        "-q",  # quiet
+        "-m", voice.path,
+        "-s", str(voice.speaker_id),
+        "-f", temp_file,
+        *piper_args
+    ]
 
     try:
         # Run the command

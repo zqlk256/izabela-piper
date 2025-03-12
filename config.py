@@ -1,5 +1,7 @@
 import os
 import sys
+from typing import List
+from pathlib import Path
 
 
 def _resource_path(relative_path):
@@ -14,7 +16,7 @@ def _resource_path(relative_path):
     return os.path.join(exe_dir, relative_path)
 
 
-def _args_to_list(args) -> list[str]:
+def _args_to_list(args) -> List[str]:
     """Converts a config value to an argument list."""
     if isinstance(args, str):
         return args.split()
@@ -29,6 +31,6 @@ class Config:
 
         self.host: str = conf.host  # type: ignore
         self.port: int = conf.port  # type: ignore
-        self.voice_dir: str = conf.voice_dir  # type: ignore
-        self.piper_exe: str = conf.piper_exe  # type: ignore
+        self.voice_dir = Path(conf.voice_dir)  # type: ignore
+        self.piper_exe = Path(conf.piper_exe)  # type: ignore
         self.piper_args = _args_to_list(conf.piper_args)
