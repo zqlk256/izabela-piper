@@ -4,10 +4,9 @@ from piper import speak
 from voice import Voice, scan_voice_dir
 from flask import Flask, request, Response
 from flask_cors import CORS
-from dynaconf import Dynaconf
 
 # load settings from config file
-settings = Dynaconf(settings_files=['settings.toml'])
+from config import settings
 
 # create flask app
 app = Flask(__name__)
