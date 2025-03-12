@@ -1,5 +1,6 @@
 import os
 import json
+import hashlib
 from pathlib import Path
 
 
@@ -11,8 +12,13 @@ class Voice:
         self.speaker_id = speaker_id
 
     def id(self) -> str:
-        """Generates a unique ID for this voice based on its path and speaker id"""
-        return f'{self.path.stem}.{self.speaker_id}'
+        """Generates a unique ID for this voice."""
+        # the id can be anything, but we need it to be stable across runs
+        # so hash() is out. we can use sha256 instead.
+        m = hashlib.sha256()
+        m.update(bytes(self.path))
+        m.update(self.speaker_id.to_bytes())
+        return m.hexdigest()
 
 
 def scan_voice_dir(directory) -> list[Voice]:
