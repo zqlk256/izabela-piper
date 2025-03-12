@@ -2,6 +2,7 @@ import os
 import json
 import hashlib
 from pathlib import Path
+from typing import List
 
 
 class Voice:
@@ -21,12 +22,12 @@ class Voice:
         return m.hexdigest()
 
 
-def scan_voice_dir(directory) -> list[Voice]:
+def scan_voice_dir(directory: str) -> List[Voice]:
     """
     Recursively search for files ending with .onnx in the given directory
     and its subdirectories.
     """
-    voices: list[Voice] = []
+    voices: List[Voice] = []
 
     print(f'Scanning {directory}...')
 
