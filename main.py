@@ -29,7 +29,7 @@ def list_voices():
     def get_sort_key(voice: Voice): return (voice.path, voice.speaker_id)
     return [
         {
-            "id": voice.id,
+            "id": voice.id(),
             "name": voice.name,
             "languageCode": voice.language
         } for voice in sorted(voices.values(), key=get_sort_key)
