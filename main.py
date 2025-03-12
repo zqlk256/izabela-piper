@@ -6,14 +6,15 @@ from flask import Flask, request, Response
 from flask_cors import CORS
 
 # load settings from config file
-from config import settings
+from config import Config
+config = Config('settings.toml')
 
 # create flask app
 app = Flask(__name__)
 CORS(app)
 
 # load voices and put them in a dictionary
-voices = {voice.id(): voice for voice in scan_voice_dir(settings.voice_dir)}
+voices = {voice.id(): voice for voice in scan_voice_dir(config.voice_dir)}
 
 
 @app.route("/")
@@ -45,10 +46,7 @@ def synthesize_speech():
     id = payload['voice']['id']
 
     # get piper stuff from settings
-    piper_exe: str = settings.piper_exe  # type: ignore
-    piper_args: list[str] = settings.piper_args  # type: ignore
-
-    wav_data = speak(text, voices[id], piper_exe, piper_args)
+    wav_data = speak(text, voices[id], config.piper_exe, config.piper_args)
     return Response(wav_data, mimetype='audio/wav')
 
 
@@ -60,4 +58,4 @@ if __name__ == '__main__':
 
     # start server
     from waitress import serve
-    serve(app, host=settings.host, port=settings.port)
+    serve(app, host=config.host, port=config.port)
