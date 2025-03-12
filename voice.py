@@ -17,7 +17,7 @@ class Voice:
         # so hash() is out. we can use sha256 instead.
         m = hashlib.sha256()
         m.update(bytes(self.path))
-        m.update(self.speaker_id.to_bytes())
+        m.update(str(self.speaker_id).encode())
         return m.hexdigest()
 
 
@@ -64,5 +64,5 @@ def scan_voice_dir(directory) -> list[Voice]:
                     print(f"Warning: Error reading file {json_path}: {str(e)}")
 
     print(f'{len(voices)} voices found.')
-    
+
     return voices
