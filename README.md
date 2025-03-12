@@ -10,6 +10,6 @@ A simple web server that exposes endpoints for use with [Izabela](https://github
 
 3. Run the EXE. This will scan the voice directory and start the web server.
 
-4. Configure Izabel to talk to the web server
+4. Configure Izabela to talk to the web server
 
    ![](images/izabela-settings.png)
