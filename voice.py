@@ -28,6 +28,8 @@ def scan_voice_dir(directory) -> list[Voice]:
     """
     voices: list[Voice] = []
 
+    print(f'Scanning {directory}...')
+
     for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith('.onnx'):
@@ -62,4 +64,5 @@ def scan_voice_dir(directory) -> list[Voice]:
                     print(f"Warning: Error reading file {json_path}: {str(e)}")
 
     print(f'{len(voices)} voices found.')
+    
     return voices
