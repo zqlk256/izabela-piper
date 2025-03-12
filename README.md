@@ -10,6 +10,6 @@ A simple web server that exposes endpoints for use with [Izabela](https://github
 
 3. Run the EXE. This will scan the voice directory and start the web server.
 
-4. Configure Izabela to talk to the web server
+4. Configure Izabela to talk to the web server. Unless you changed it in the settings file the API endpoint should be `http://localhost:8000`
 
    ![](images/izabela-settings.png)
