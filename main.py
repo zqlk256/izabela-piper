@@ -19,6 +19,7 @@ voices = {voice.id(): voice for voice in scan_voice_dir(config.voice_dir)}
 
 @app.route("/")
 def index():
+    """Endpoint to show a simple HTML page"""
     return f"<h1>Piper Web Interface</h1><p>This web server provides access to {len(voices)} different voices!</p>"
 
 
@@ -46,7 +47,7 @@ def synthesize_speech():
     text = payload['text']
     id = payload['voice']['id']
 
-    # get piper stuff from settings
+    # run piper
     wav_data = speak(text, voices[id], config.piper_exe, config.piper_args)
     return Response(wav_data, mimetype='audio/wav')
 
