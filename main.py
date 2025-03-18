@@ -27,12 +27,13 @@ def list_voices():
     """Endpoint to list all available voices"""
     # sort voices by path, then by speaker
     def get_sort_key(voice: Voice): return (voice.path, voice.speaker_id)
+    items = sorted(voices.items(), key=lambda item: get_sort_key(item[1]))
     return [
         {
-            "id": voice.id(),
+            "id": id,
             "name": voice.name,
             "languageCode": voice.language
-        } for voice in sorted(voices.values(), key=get_sort_key)
+        } for (id, voice) in items
     ]
 
 
